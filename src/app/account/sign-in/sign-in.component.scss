@@ -1,0 +1,50 @@
+@import '../../../assets/styles/color';
+
+.user-account-forms {
+  .logo {
+    text-align: center;
+
+    img {
+      width: auto;
+      margin: 1em auto;
+      height: 8em;
+    }
+  }
+
+  .form-section {
+    background: $white;
+    padding: 2em;
+    box-shadow: $box-shadow;
+    margin: 1em auto;
+    max-width: 90%;
+    border-radius: .5em;
+
+    @media (min-width : 1500px) {
+      max-width: 30%;
+    }
+
+    .item {
+      padding: 1em 0;
+      border-bottom: 1px solid $cloud;
+      padding-bottom: 0;
+      margin-bottom: .5em;
+      .label{
+          display: block;
+          padding-bottom: .2em;
+      }
+      input{
+          margin: 0;
+          border-radius: 0;
+          background: none;
+          padding: 1em;
+      }
+      &:last-child{
+          border: none;
+      }
+
+      button{
+          display: block;
+      }
+    }
+  }
+}

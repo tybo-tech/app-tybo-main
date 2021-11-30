@@ -1,0 +1,214 @@
+<app-home-side-nav></app-home-side-nav>
+<div class="main">
+  <div class="top-nav-bar">
+    <div class="notice">
+      <div class="subs">
+        <marquee behavior="" direction="">
+          Delivery method and fees depends on the seller and the product, check product details for shipping information
+        </marquee>
+      </div>
+    </div>
+
+    <div class="nav-grid">
+
+
+      <div class="col" (click)="toggle()">
+        <span class="material-icons pointer">
+          menu
+        </span>
+      </div>
+
+      <!-- <div class="logo col" *ngIf="logoUx" (click)="goto('')">
+        <img *ngIf="logoUx.Name" [src]="logoUx.LogoUrl" alt="">
+        <img *ngIf="!logoUx.Name" [src]="logoUx.LogoUrl" style="width: auto; height: 2.5em;" alt="">
+      </div> -->
+      <div class="logo col" (click)="showAllProducts()">
+        <img src="../../../../assets/images/common/tybo.png" style="width: auto; height: 2.5em;" alt="">
+      </div>
+
+      <div class="col col-search">
+        <span class="material-icons pointer" (click)="showSearch = true">
+          search
+        </span>
+      </div>
+      <div class="cart col">
+        <mat-icon [matBadge]="carttItems" matBadgeColor="pink" (click)="goto('shop/cart')">shopping_bag</mat-icon>
+      </div>
+
+    </div>
+
+    <div class="scroller-horizontal">
+
+      <div class="divisions" *ngIf="parentCatergories  && parentCatergories .length">
+        <div class="division" *ngFor="let item of parentCatergories " [ngClass]="item.Class">
+          <a (click)="tab(item)">
+            {{item.Name}}
+            <!-- <span class="material-icons is-selected" *ngIf="item.IsSelected">
+              arrow_drop_down
+            </span> -->
+          </a>
+        </div>
+        <div class="division">
+          <a (click)="goto('home/on-sale')" style="color: red;">
+            Sale
+          </a>
+        </div>
+        <div class="division">
+          <a (click)="goto('home/shops')">
+            Shops
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+    <!-- 
+    <div class="sub-carts">
+      <div class="subs" *ngIf="catergories">
+        <div class="sub-catergory" *ngFor="let child of catergories">
+          <button (click)="childCategoryselected(child)" [ngClass]="child.Class">{{child.Name}}
+          </button>
+        </div>
+
+      </div>
+    </div> -->
+  </div>
+</div>
+
+
+
+<div class="search-mobile" *ngIf="showSearch">
+  <div class="close">
+    <span class="material-icons pointer" (click)="showSearch = false">
+      close
+    </span>
+  </div>
+  <div class="form-item search">
+    <input type="search" [(ngModel)]="searchString" name="" id="" placeholder="🔎 Search products and shops"
+      (keyup)="search()">
+    <div class="search-results" *ngIf="searchString && searchString.length > 0">
+      <span *ngIf="searchResults && searchResults.length">
+        <div class="result-item" *ngFor="let item of searchResults" (click)="openSearchResult(item)">
+          <div class="image">
+            <img [src]="item.Icon" alt="">
+          </div>
+          <div class="name">
+            {{item.Name}}
+            <span class="price">
+              {{item.RegularPrice | currency:'R'}}
+            </span>
+
+            <span class="company" *ngIf="item && item.Company">
+              <div class="company-image">
+                <img *ngIf="item.Company.Dp" [src]="item.Company.Dp" alt="">
+                <img *ngIf="!item.Company.Dp" src="assets/images/shop.svg" alt="">
+              </div>
+              <div class=""> {{item.Object.Company?.Name}}</div>
+            </span>
+
+          </div>
+
+        </div>
+      </span>
+
+      <span *ngIf="searchResults && !searchResults.length">
+        <div class="sorry">
+          <span>
+            <img src="assets/images/common/search-no-found.svg" alt="">
+          </span>
+          Sorry we didn't find any results matching this search : <b>{{searchString}}</b>
+        </div>
+      </span>
+
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- 
+<div class="top-nav-bar">
+  <div class="notice">
+    <div class="subs" *ngIf="selectedCategory">
+      <marquee behavior="" direction="">
+        Delivery method and fees depends on the seller and the product, check product details for shopping information
+      </marquee>
+    </div>
+  </div>
+  <div class="nav-grid">
+
+
+    <div class="col" (click)="toggle()">
+      <span class="material-icons pointer">
+        menu
+      </span>
+    </div>
+
+    <div class="logo col" *ngIf="logoUx" (click)="goto('')">
+      <img *ngIf="logoUx.Name" [src]="logoUx.LogoUrl" alt="">
+      <img *ngIf="!logoUx.Name" [src]="logoUx.LogoUrl" style="width: auto; height: 2.5em;" alt="">
+    </div>
+
+
+    <div class="search col">
+  
+      
+    </div>
+
+
+    <div class="cart col">
+      <span class="material-icons pointer" (click)="showSearch = true">
+        search
+      </span>
+    </div>
+    <div class="cart col">
+      <mat-icon [matBadge]="carttItems" matBadgeColor="pink" (click)="cart()">shopping_bag</mat-icon>
+    </div>
+
+  
+    
+
+
+
+
+  </div>
+  <div class="scroller-horizontal">
+
+    <div class="divisions" *ngIf="navItems && navItems.length">
+      <div class="division" *ngFor="let item of navItems" [ngClass]="item.Class">
+        <a (click)="parentNavItemClicked(item)">
+          {{item.Label}}
+        </a>
+      </div>
+      <div class="division">
+        <a (click)="goto('home/on-sale')" style="color: red;">
+          Sale
+        </a>
+      </div>
+      <div class="division">
+        <a (click)="goto('home/shops')">
+          Shops
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="sub-carts">
+  <div class="subs" *ngIf="selectedCategory">
+    <div class="sub-catergory" *ngFor="let child of selectedCategory.Children">
+      <button *ngIf="child.Products && child.Products.length" (click)="childCategoryselected(child)"
+        [ngClass]="child.Class">{{child.Name}}
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+</div> -->
